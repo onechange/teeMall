@@ -3,8 +3,9 @@
 <!DOCTYPE html>
 <!-- 登录 注册 购物车... -->
 <div class="container-fluid">
-	<div class="col-md-4">
-		<img src="img/logo2.png" />
+	<div class="col-md-4" style="width: auto" >
+		<a href="https://juejin.im/"><img src="img/logo.a7995ad.svg" /></a>
+
 	</div>
 	<div class="col-md-5">
 		<img src="img/header.png" />
