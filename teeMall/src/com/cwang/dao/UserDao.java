@@ -14,4 +14,11 @@ public class UserDao {
         int update = runner.update(sql, user.getUid(), user.getUsername(), user.getPassword(), user.getName(), user.getEmail(), user.getTelephone(), user.getBirthday(), user.getSex(), user.getState(), user.getCode());
         return update;
     }
+
+    public void active(String activeCode) throws SQLException {
+        QueryRunner runner = new QueryRunner(DataSourceUtils.getDataSource());
+        String sql = "update user set state=? where code=?";
+        runner.update(sql,1,activeCode);
+
+    }
 }

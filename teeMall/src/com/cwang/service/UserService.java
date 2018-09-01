@@ -17,4 +17,14 @@ public class UserService {
         }
         return row > 0 ? true : false;
     }
+
+    public void active(String activeCode) {
+        UserDao dao = new UserDao();
+        try {
+            dao.active(activeCode);
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+
+    }
 }

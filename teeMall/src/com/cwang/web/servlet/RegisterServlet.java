@@ -3,10 +3,12 @@ package com.cwang.web.servlet;
 import com.cwang.domain.User;
 import com.cwang.utils.CommonUtils;
 import com.cwang.service.UserService;
+import com.cwang.utils.MailUtils;
 import org.apache.commons.beanutils.BeanUtils;
 import org.apache.commons.beanutils.ConvertUtils;
 import org.apache.commons.beanutils.Converter;
 
+import javax.mail.MessagingException;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
@@ -48,7 +50,9 @@ public class RegisterServlet extends HttpServlet {
 //            private int state;//是否注册
             user.setState(0);
 //            private String code;//
-            user.setCode(CommonUtils.getUUID());
+            String activeCode = CommonUtils.getUUID();
+            user.setCode(activeCode);
+
             System.out.println("开始传到service"+System.currentTimeMillis());
             //传递到service层
             UserService service = new UserService();
@@ -56,6 +60,13 @@ public class RegisterServlet extends HttpServlet {
 
             if (isRegisterSuccess)
             {
+                String emailMsg = "恭喜您注册成功,点击激活"
+                        + "<a href='http://localhost:8080/active?activeCode="+activeCode+"'>"+"http://localhost:8080/active?activeCode="+activeCode+"</a>";
+                try {
+                    MailUtils.sendMail(user.getEmail(),emailMsg);
+                } catch (MessagingException e) {
+                    e.printStackTrace();
+                }
                 System.out.println("注册成功"+System.currentTimeMillis());
                 resp.sendRedirect(req.getContextPath()+"/registerSuccess.jsp");
             }else {

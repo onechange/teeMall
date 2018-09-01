@@ -20,13 +20,13 @@ public class MailUtils {
 
 		Properties props = new Properties();
 		props.setProperty("mail.transport.protocol", "SMTP");
-		props.setProperty("mail.host", "smtp.126.com");
+		props.setProperty("mail.host", "smtp.163.com");
 		props.setProperty("mail.smtp.auth", "true");// 指定验证为true
 
 		// 创建验证器
 		Authenticator auth = new Authenticator() {
 			public PasswordAuthentication getPasswordAuthentication() {
-				return new PasswordAuthentication("haohao_itcast", "hao12345");
+				return new PasswordAuthentication("maligousi110", "qq12345");
 			}
 		};
 
@@ -35,7 +35,7 @@ public class MailUtils {
 		// 2.创建一个Message，它相当于是邮件内容
 		Message message = new MimeMessage(session);
 
-		message.setFrom(new InternetAddress("haohao_itcast@126.com")); // 设置发送者
+		message.setFrom(new InternetAddress("maligousi110@163.com")); // 设置发送者
 
 		message.setRecipient(RecipientType.TO, new InternetAddress(email)); // 设置发送方式与接收者
 
