@@ -27,4 +27,15 @@ public class UserService {
         }
 
     }
+
+    public boolean check(String name) {
+        UserDao dao = new UserDao();
+        Long check = 0l;
+        try {
+            check = dao.check(name);
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return check > 0 ? true : false;
+    }
 }

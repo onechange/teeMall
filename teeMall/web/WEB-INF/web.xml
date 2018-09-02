@@ -11,7 +11,27 @@
         <servlet-class>com.cwang.web.servlet.RegisterServlet</servlet-class>
     </servlet>
     <servlet-mapping>
+
         <servlet-name>RegisterServlet</servlet-name>
         <url-pattern>/register</url-pattern>
     </servlet-mapping>
+    <servlet>
+        <display-name>ActiveServlet</display-name>
+        <servlet-name>ActiveServlet</servlet-name>
+        <servlet-class>com.cwang.web.servlet.ActiveServlet</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>ActiveServlet</servlet-name>
+        <url-pattern>/active</url-pattern>
+    </servlet-mapping>
+    <servlet>
+        <display-name>CheckUsernameServlet</display-name>
+        <servlet-name>CheckUsernameServlet</servlet-name>
+        <servlet-class>com.cwang.web.servlet.CheckUsernameServlet</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>CheckUsernameServlet</servlet-name>
+        <url-pattern>/checkUsername</url-pattern>
+    </servlet-mapping>
+
 </web-app>

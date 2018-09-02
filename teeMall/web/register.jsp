@@ -8,6 +8,7 @@
 <link rel="stylesheet" href="css/bootstrap.min.css" type="text/css" />
 <script src="js/jquery-1.11.3.min.js" type="text/javascript"></script>
 <script src="js/bootstrap.min.js" type="text/javascript"></script>
+<script src="js/jquery.validate.min.js" type="text/javascript"></script>
 <!-- 引入自定义css文件 style.css -->
 <link rel="stylesheet" href="css/style.css" type="text/css" />
 
@@ -29,6 +30,53 @@ font {
 	padding: 0 10px;
 }
 </style>
+<script type="text/javascript">
+    //自定义校验规则
+    $.validator.addMethod(
+        "checkUsername",
+        function(value,element,params){
+            var flag = false;
+            $.ajax({
+                "async":false,
+                "url":"${pageContext.request.contextPath}/checkUsername",
+                "data":{"username":value},
+                "type":"POST",
+                "dataType":"json",
+                "success":function (data) {
+
+                    flag = data.isExist;
+
+                }
+            });
+
+            return !flag;
+        }
+    );
+    $(function () {
+        $("#myform").validate({
+            rules:{
+                "username":{
+                    "required":true,
+                    "checkUsername":true
+                },
+                "password":{
+                    "required":true,
+                    "rangelength":[6,12]
+                }
+            },
+            messages:{
+                "username":{
+                    "required":"用户名不能为空",
+                    "checkUsername":"用户名已存在"
+                },
+                "password":{
+                    "required":"密码不能为空",
+                    "rangelength":"密码长度6-12位"
+                }
+            }
+        });
+    });
+</script>
 </head>
 <body>
 
@@ -42,7 +90,7 @@ font {
 			<div class="col-md-8"
 				style="background: #fff; padding: 40px 80px; margin: 30px; border: 7px solid #ccc;">
 				<font>会员注册</font>USER REGISTER
-				<form id="myform" action="${pageContext.request.contextPath}/register" class="form-horizontal" style="margin-top: 5px;">
+				<form id="myform" action="${pageContext.request.contextPath}/register" method="post" class="form-horizontal" style="margin-top: 5px;">
 					<div class="form-group">
 						<label for="username" class="col-sm-2 control-label">用户名</label>
 						<div class="col-sm-6">
@@ -115,7 +163,7 @@ font {
 								style="background: url('./images/register.gif') no-repeat scroll 0 0 rgba(0, 0, 0, 0); height: 35px; width: 100px; color: white;">
 						</div>
 					</div>
-				</form>
+				</form> 
 			</div>
 
 			<div class="col-md-2"></div>
